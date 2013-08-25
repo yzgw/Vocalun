@@ -1,0 +1,13 @@
+#vocalun_album_information{
+  margin-top: 10px;
+}
+
+#vocalun_album_information li{
+  display: inline;
+  line-height: 30px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;  
+}

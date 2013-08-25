@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,  
+  "name": "Vocalun",
+  "description": "ニコニコ動画上に今見ている動画の曲が発売されているかを表示します。",
+  "version": "0.10",
+  "content_scripts": [
+    {
+      "matches": ["http://www.nicovideo.jp/watch/*"],
+      "js": ["jquery-2.0.3.min.js", "show_album_information.js"],
+      "css": ["album_information.css"]
+    }
+  ],
+  "permissions" : ["tabs", "storage", "http://vocadb.net/api/*"]
+}

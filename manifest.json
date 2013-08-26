@@ -6,8 +6,8 @@
   "content_scripts": [
     {
       "matches": ["http://www.nicovideo.jp/watch/*"],
-      "js": ["jquery-2.0.3.min.js", "show_album_information.js"],
-      "css": ["album_information.css"]
+      "js": ["src/jquery-2.0.3.min.js", "src/show_album_information.js"],
+      "css": ["src/album_information.css"]
     }
   ],
   "permissions" : ["tabs", "storage", "http://vocadb.net/api/*"]

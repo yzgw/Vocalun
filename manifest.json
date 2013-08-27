@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,  
   "name": "Vocalun",
-  "description": "ニコニコ動画上に今見ている動画の曲が発売されているかを表示します。",
+  "description": "ニコニコ動画上で見ている動画の曲がアルバムに収録されているかを表示します。",
   "version": "0.11",
   "icons": { "48": "images/icon_48.png", "128": "images/icon_128.png" },
   "content_scripts": [

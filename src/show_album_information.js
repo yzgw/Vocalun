@@ -16,7 +16,9 @@ setInterval(function() {
 function show_album_information(){
   if(tags.indexOf("VOCALOID") != -1 || tags.indexOf("音楽") != -1){
     var id = get_video_id(document.URL)
+    console.log(id)
     load_album_information({
+      id: id,
       success: function(json){
         var dom = get_album_information(json['Albums'])
         $('#vocalun_album_information').empty().append(dom)          
@@ -35,7 +37,9 @@ function load_album_information(param){
     url: url,
     cache: true,
     crossDomain: true,
-    dataType: "jsonp",
+    dataType: "json",
+    jsonpCallback: "callback",
+    jsonp: "callback",
     success: function(data, textStatus, jqXHR){
       if(data != null)
         param.success(data, textStatus, jqXHR)

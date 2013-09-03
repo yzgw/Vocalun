@@ -11,6 +11,12 @@ describe("Show album information.js", function() {
     expect(id).toBe('sm17654032');
   });
 
+  it("can get video id from complex nicovideos' url with param", function() {
+    var url = 'http://www.nicovideo.jp/watch/sm21323813?group_id=37912666'
+    var id = get_video_id(url)
+    expect(id).toBe('sm21323813');
+  });
+
   it("succeeds to get album information from vocadb", function() {
     var flag = false
     var json = load_album_information({

@@ -32,12 +32,10 @@ function show_album_information(){
 
 function load_album_information(param){
   var url = VOCADB_SONB_API + 'ByPV?pvId=' +  param.id + '&service=NicoNicoDouga'
-  console.log(url)
   $.ajax({
     url: url,
     cache: true,
     crossDomain: true,
-    dataType: "json",
     jsonpCallback: "callback",
     jsonp: "callback",
     success: function(data, textStatus, jqXHR){
@@ -59,7 +57,7 @@ function get_all_tags(){
 }
 
 function get_video_id(url){
-  return url.split("/").slice(-1)[0].split("&")[0].split("#")[0]
+  return url.split("/").slice(-1)[0].split("?")[0].split("#")[0]
 }
 
 function get_album_information(albums){

@@ -29,7 +29,7 @@ var DomObserver = function(targetDom) {
 var VocaDBFetcher = function(config) {
     this.cache = new Cache(localStorage);
 
-    this.ONE_HOUR = 60 * 60 * 1000; //1 hour
+    this.ONE_HOUR = 60 * 60 * 1000; //milliseconds
 
     this.getSongApiUrl = function(pvId){
         return config.API_BASE_URL + "songs?pvService=NicoNicoDouga&pvId=" + pvId + "&fields=Albums";
@@ -54,11 +54,11 @@ var VocaDBFetcher = function(config) {
         },
         url: url,
         cache: true,
-        jsonpCallback: "callback",
+        jsonpCallback: "jsonp",
         jsonp: "callback",
         success: function(data, textStatus, jqXHR){
             if(data != null){
-            VocalunConsole.log("Cache stored.")
+                VocalunConsole.log("Cache stored.")
                 this.cache.store({
                     key: params.id,
                     value: data

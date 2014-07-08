@@ -1,5 +1,5 @@
 describe('Cache', function() {
-    it('stores a value into storage', function() {
+    it('should stores a value into storage', function() {
         var storage = {};
         var cache = new Cache(storage);
         cache.store({
@@ -10,7 +10,7 @@ describe('Cache', function() {
         expect(stored.value).toBe("bar");
     });
 
-    it('returns value if cache not expired', function() {
+    it('should returns value if cache not expired', function() {
         var storage = {};
         var cache = new Cache(storage);
         cache.store({
@@ -20,52 +20,43 @@ describe('Cache', function() {
         expect(cache.find('foo')).toBe("bar");
     });
 
-    it('returns null if cache expired', function() {
+    describe('Expired cache', function() {
         var storage = {};
         var cache = new Cache(storage);
-        cache.store({
-            key: 'foo', value: 'bar'
-        }, 10);
 
-        var flag = false;
-        runs(function(){
+        beforeEach(function(done) {
+            cache.store({
+                key: 'foo', value: 'bar'
+            }, 10);
             setTimeout(function() {
-                flag = true;
+                done();
             }, 50);
         });
 
-        waitsFor(function() {
-            return flag;
-        }, "Wait cache expire", 100);
-
-        runs(function() {
+        it('returns null', function() {
             expect(cache.find('foo')).toBe(null);
         });
     });
+
 });
 
 describe('VocaDBFetcher', function() {
-    it('fetch album information', function() {
+    var result;
+
+    beforeEach(function(done) {
         var fetcher = new VocaDBFetcher(Config.VocaDB);
-        var flag = false;
-        var result;
-
-        runs(function() {
-            fetcher.fetchAlbumInformation({
-                id: 'sm18460014',
-                success: function(json){
-                    flag = true;
-                    result = json;
-                }
-            });
+        fetcher.fetchAlbumInformation({
+            id: 'sm18460014',
+            success: function(json){
+                flag = true;
+                result = json;
+            }
         });
+        done();
+    });
 
-        waitsFor(function() {
-            return flag;
-        }, "Wait ajax request", 80);
-
-        runs(function() {
-            expect(result).toNotBe(null);
-        });
+    it('fetch album information', function(done) {
+        expect(result).not.toBe(null);
+        done();
     });
 });

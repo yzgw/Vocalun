@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,  
+  "manifest_version": 2,
   "name": "Vocalun",
   "description": "ニコニコ動画上で見ている動画の曲がアルバムに収録されているかを表示します。",
   "version": "0.12",
@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["http://www.nicovideo.jp/watch/*"],
-      "js": ["src/jquery-2.0.3.min.js", "src/show_album_information.js"],
+      "js": ["src/jquery-2.1.1.min.js", "src/show_album_information.js"],
       "css": ["src/album_information.css"]
     }
   ],

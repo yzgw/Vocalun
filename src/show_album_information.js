@@ -26,8 +26,7 @@ var DomObserver = function(targetDom) {
     }
 };
 
-var VocaDBFetcher = function(config) {
-    this.cache = new Cache(localStorage);
+var VocaDBFetcher = function(config, cache) {
 
     this.ONE_HOUR = 60 * 60 * 1000; //milliseconds
 
@@ -39,7 +38,7 @@ var VocaDBFetcher = function(config) {
       var url = this.getSongApiUrl(params.id);
       VocalunConsole.log(url);
 
-      var cachedJson = this.cache.find(params.id);
+      var cachedJson = cache.find(params.id);
       if(cachedJson !== null) {
         VocalunConsole.log("Cache used.")
         params.success(cachedJson);
@@ -59,7 +58,7 @@ var VocaDBFetcher = function(config) {
         success: function(data, textStatus, jqXHR){
             if(data != null){
                 VocalunConsole.log("Cache stored.")
-                this.cache.store({
+                cache.store({
                     key: params.id,
                     value: data
                 }, this.ONE_HOUR);
@@ -143,7 +142,7 @@ var VocalunController = function() {
         if(isTargetCategoryTag(tags)) {
             var videoId = getVideoId(document.URL);
 
-            var fetcher = new VocaDBFetcher(Config.VocaDB);
+            var fetcher = new VocaDBFetcher(Config.VocaDB, new Cache(localStorage));
             fetcher.fetchAlbumInformation({
                 id: videoId,
                 success: function(json){

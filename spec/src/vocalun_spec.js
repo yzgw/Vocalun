@@ -1,3 +1,9 @@
+var Config = require('../../src/config');
+var VocalunConsole = require('../../src/vocalun_console');
+var DomObserver = require('../../src/dom_observer');
+var VocaDBFetcher = require('../../src/vocadb_fetcher');
+var Cache = require('../../src/cache.js');
+
 describe('Cache', function() {
     it('should stores a value into storage', function() {
         var storage = {};
@@ -44,7 +50,9 @@ describe('VocaDBFetcher', function() {
     var result;
 
     beforeEach(function(done) {
-        var fetcher = new VocaDBFetcher(Config.VocaDB);
+        var storage = {};
+        var cache = new Cache(storage);
+        var fetcher = new VocaDBFetcher(Config.VocaDB, cache);
         fetcher.fetchAlbumInformation({
             id: 'sm18460014',
             success: function(json){
